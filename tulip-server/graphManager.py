@@ -20,7 +20,7 @@ sys.path.append(libtulip_dir)
 from tulip import *
 
 # path to custom scripts that perform the analysis
-lgtPython_dir = "/home/brenoust/Dropbox/OTMedia/lighterPython/entanglement" 
+lgtPython_dir = "/Users/ala/Dropbox/Antoine/entanglement" 
 sys.path.append(lgtPython_dir)
 import entanglementAnalysisLgt
 import entanglementSynchronization
