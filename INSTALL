@@ -1,0 +1,83 @@
+INSTALLATION INSTRUCTIONS
+-------------------------
+
+Requirements:
+Python 2.7 or above
+    - Numpy
+    - Tornado web server
+Tulip 3.7.0 or above
+    - GEM (Frick)
+Google Chrome
+TulipPosy
+
+-------------------------
+First install python 2.7, it is recommended to install as well pip (easy_install pip)
+Install Numpy and Tornado, other libraries should be already wrapped within python
+(cgi, json...)
+Install Tulip from the given binary
+Install google chrome (you will launch it with the --disable-web-security option)
+Fork TulipPosy somewhere (github.com/renoust/TulipPosy)
+Launch the python server using the tulip-server/tulip-server.py script (a shell script 
+is provided as well but should be adapted to your environment).
+
+lgtPython_dir=path/to/entanglement/scripts
+
+WARNING: Do not forget to link you tulip library with python.
+Launch google-chrome without security (be careful no instance of Chrome is already
+running when calling it, since the disabling flag would not apply).
+Reach the demo page stored at d3/vast.htm
+-------------------------
+Environment export:
+Windows (?): you should add the tulip DLL path (from your install folder) in a global
+variable named PYTHON_PATH or PYTHONPATH
+Linux: tulip-server/tulip-server.sh provides a wrapper around the main python app, with
+beforehand the environment export: export LD_LIBRARY_PATH:/you-tulip-install-path/lib
+MacOSX (?): Same principles,
+export PYTHONPATH="/Applications/Tulip-3.8.0.app/Contents/Frameworks/python"
+if any problem: there is something like VERSIONER_PYTHON_PREFER_32_BIT="yes"
+
+also, 
+export DYLD_LIBRARY_PATH="/Applications/Tulip-3.8.0.app/Contents/Frameworks"
+
+You should also comment all references to "searchQuery", or this part of the code
+might be replaced by a query manager that returns a json file on any platform you
+want (linkedIn etc.)
+
+-------------------------
+JSON graph format:
+{"nodes":[
+        {
+            "id": XXX,
+            "descriptors": "X, Y, Z",
+            "label": "title",
+            "x": 0.0,
+            "y": 0.0
+        },
+        {...}
+    ],
+"links":[
+        {
+            "id": YYY,
+            "source": node_source_id,
+            "target": node_target_id,
+            "descriptors": "X, Y, Z, T"
+        }
+}
+
+The JSON format is an hashtable of keys "nodes" and "links".
+"nodes" should contain an array of hashtables, each of which containing the
+mandatory informations:
+    "id": a unique identifier (usually integer)
+    "descriptors": a list of the catalysts describing the node (usually a
+                    string of values separated by ';')
+    "label": the label to display (usually a string)
+    "x" and "y": not sure they are mandatory but stores a possible initial
+                  layout (numerical values)
+in the same manner, "links" contains an array of hashtables referring to
+the links with as well:
+    "id": a unique identifier (usually integer)
+    "descriptors": a list of the catalysts describing shared by the connected
+                    nodes (usually a string of values separated by ';')
+    "source", "target": the node source/target id (should match with nodes id)
+   
+
